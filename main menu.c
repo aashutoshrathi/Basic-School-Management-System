@@ -23,9 +23,8 @@ void changepass(char pass[])
  }
   pass[i]= '\0';
 
-
-    FILE *fp;
     char password[8];
+    FILE *fp;
     fp=fopen("adminpass.txt","r+");
     while(fscanf(fp,"%s",password)== 1)
     {
@@ -40,9 +39,10 @@ void changepass(char pass[])
         system("cls");
         printf(GREEN "\n\n\t\tCorrect Password ...\n" RESET);
         printf("\n\t\tEnter Your New Password :");
+        scanf("%s",password);
         fprintf(fp,"%s",password);
         char rdef[8];
-        printf("\n\t\t Enter Again :  ");
+        printf("\n\t\tEnter Again :  ");
         scanf("%s",rdef);
         if(strcmp(password,rdef)==0)
         {
