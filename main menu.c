@@ -40,7 +40,7 @@ void changepass(char pass[])
         system("cls");
         printf(GREEN "\n\n\t\tCorrect Password ...\n" RESET);
         printf("\n\t\tEnter Your New Password :");
-        fprintf("%s",password);
+        fprintf(fp,"%s",password);
         char rdef[8];
         printf("\n\t\t Enter Again :  ");
         scanf("%s",rdef);
@@ -64,7 +64,6 @@ void changepass(char pass[])
     }
     }
 }
-
 
 void passmenu()
 {
@@ -111,9 +110,12 @@ void passchecka(char passa[])
  }
   passa[i]= '\0';
 
-    char def[8];
-    strcpy(def,"adminpas");
-    int z = strcmp(def,passa);
+    FILE *fp;
+    char password[8];
+    fp=fopen("adminpass.txt","r+");
+    while(fscanf(fp,"%s",password)== 1)
+    {
+      int z=strcmp(password,passa);
     if (z!=0)
     {
         system("cls");
@@ -128,6 +130,7 @@ void passchecka(char passa[])
 
     }
 
+}
 }
 
 void adminmenu()
