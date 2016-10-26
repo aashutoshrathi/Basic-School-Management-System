@@ -8,6 +8,20 @@
 #define GREEN   "\033[32m"      /* Green */
 #define YELLOW  "\033[33m"      /* Yellow */
 
+void newstudent()
+{
+    FILE *ns;
+    char name[20];
+    ns=fopen("newstu.txt","w+");
+    printf("\n\t\t Name : ");
+    scanf("%s",name);
+    fprintf(ns,"%s",name);
+    printf("\n\t\t Address : ");
+    scanf("%s",name);
+    fprintf(ns,"%s",name);
+    main();
+
+}
 
 void changepass(char pass[])
 {
@@ -41,7 +55,7 @@ void changepass(char pass[])
         printf("\n\t\tEnter Your New Password :");
         scanf("%s",password);
         fprintf(fp,"%s",password);
-        char rdef[8];
+        char rdef[9];
         printf("\n\t\tEnter Again :  ");
         scanf("%s",rdef);
         if(strcmp(password,rdef)==0)
@@ -53,6 +67,7 @@ void changepass(char pass[])
             scanf("%d",&inp);
             if(inp==1)
             {
+                system("cls");
                 main();
             }
             else
@@ -63,6 +78,7 @@ void changepass(char pass[])
         }
     }
     }
+    fclose(fp);
 }
 
 void passmenu()
@@ -155,7 +171,7 @@ case 1:
 case 2:
     {   system("cls");
         printf("\n\t\t Enter A New Student Entry \n");
-        passmenu();
+        newstudent();
         break;
     }
 case 3:
