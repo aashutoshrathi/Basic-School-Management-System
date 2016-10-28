@@ -34,7 +34,7 @@ void newstudent()
             printf(RED "\n\n\t\t Function Coming Soon ...." RESET);
             break;
         }
-    case 3:
+        case 3:
         {
             system("cls");
             main();
