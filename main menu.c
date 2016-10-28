@@ -11,15 +11,46 @@
 void newstudent()
 {
     FILE *ns;
-    char name[20];
-    ns=fopen("newstu.txt","w+");
+    char name[50];
+    int m;
+    char addr[100];
+    ns=fopen("newstu.txt","rw+");
+    printf(YELLOW "\n\t\t\t New Student Entry Menu \n" RESET);
     printf("\n\t\t Name : ");
     scanf("%s",name);
     fprintf(ns,"%s",name);
     printf("\n\t\t Address : ");
-    scanf("%s",name);
-    fprintf(ns,"%s",name);
-    main();
+    scanf("%s",addr);
+    fprintf(ns,"%s",addr);
+    printf(GREEN "\n\n\t\t New Student Entry Created Successfully : " RESET);
+    printf("\n\t\t Name : %s \n\t\t Address : %s ",name,addr);
+
+    printf("\n\n \t\t 1.Create Another Entry");
+    printf("\n\t\t 2.Show Previous Entries");
+    printf("\n\t\t 3.Go Back to Main Menu");
+    printf("\n\n\t\t Your Choice :- ");
+    scanf("%d",&m);
+    switch(m)
+    {
+    case 1:
+        {
+            system("cls");
+            newstudent();
+            break;
+        }
+    case 2:
+        {
+            system("cls");
+            printf(RED "\n\n\t\t Function Coming Soon ...." RESET);
+            break;
+        }
+    case 3:
+        {
+            system("cls");
+            main();
+            break;
+        }
+    }
 
 }
 
@@ -39,7 +70,7 @@ void changepass(char pass[])
 
     char password[8];
     FILE *fp;
-    fp=fopen("adminpass.txt","r+");
+    fp=fopen("adminpass.txt","rw+");
     while(fscanf(fp,"%s",password)== 1)
     {
       int z=strcmp(password,pass);
@@ -204,6 +235,7 @@ printf("\n\t\t\t\t ***** Welcome to School Management System ***** \n");
 printf("\n\t\t 1. Admin Login\n");
 printf("\t\t 2. Teacher Login\n");
 printf("\t\t 3. Student Login\n");
+printf("\t\t 4. BETA Testing Feature\n");
 printf("\n\t\t Press Ctrl+C to Exit any time\n");
 printf("\n\t\t Enter your Choice :-  ");
 int c;
@@ -227,6 +259,11 @@ case 3:
         printf("\n\t\t You selected Student Login \n ");
         passmenu();
         break;
+    }
+case 4:
+    {
+        system("cls");
+        newstudent();
     }
 default:
     {   system("cls");
