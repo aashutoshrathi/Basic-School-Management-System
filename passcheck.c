@@ -1,5 +1,3 @@
-
-
 void passchecka(char passa[])
 {
     char ch;
@@ -13,11 +11,15 @@ void passchecka(char passa[])
  }
   passa[i]= '\0';
 
-    char def[8];
-    strcpy(def,"adminpas");
-    int z = strcmp(def,passa);
+    FILE *fp;
+    char password[8];
+    fp=fopen("adminpass.txt","r+");
+    while(fscanf(fp,"%s",password)== 1)
+    {
+      int z=strcmp(password,passa);
     if (z!=0)
     {
+        system("cls");
         printf(RED "\n\n\t\t Wrong Password, Try Again !!\n" RESET);
         passmenu();
     }
@@ -29,4 +31,5 @@ void passchecka(char passa[])
 
     }
 
+}
 }
