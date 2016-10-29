@@ -4,14 +4,14 @@ void newstudent()
     char name[50];
     int m;
     char addr[100];
-    ns=fopen("newstu.txt","rw+");
+    ns=fopen("newstu.txt","a+");
     printf(YELLOW "\n\t\t\t New Student Entry Menu \n" RESET);
     printf("\n\t\t Name : ");
     scanf("%s",name);
-    fprintf(ns,"%s",name);
+    fprintf(ns,"%s\n",name);
     printf("\n\t\t Address : ");
     scanf("%s",addr);
-    fprintf(ns,"%s",addr);
+    fprintf(ns,"%s\n",addr);
     printf(GREEN "\n\n\t\t New Student Entry Created Successfully : " RESET);
     printf("\n\t\t Name : %s \n\t\t Address : %s ",name,addr);
 
