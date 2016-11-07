@@ -2,43 +2,58 @@
 #include <string.h>
 #include <time.h>
 #include <stdlib.h>
+#include <dos.h>
 
 #define RESET   "\033[0m"
+#define BLUE    "\033[34m"      /* Blue */
+#define BOLDYELLOW  "\033[1m\033[33m"      /* Bold Yellow */
 #define RED     "\033[31m"      /* Red */
 #define GREEN   "\033[32m"      /* Green */
 #define YELLOW  "\033[33m"      /* Yellow */
+#define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
+#define gap printf("\n\t\t");
 
 void loginmenustu()
 {
+    loop:
+    printf("");
     FILE *stulog;
+    char free[100]="ID:";
     char userstu[100];
     char passstu[100];
     char temp[100];
     printf("\n\t\t Enter Your User ID : ");
     scanf("%s",userstu);
-    stulog=fopen("newstu","r+");
-
-    while(fscanf(stulog, "%s", temp) != EOF)
+    strcat(free,userstu);
+    stulog=fopen("newstu.txt","r");
+    int skipper=0;
+    while(!feof(stulog))
     {
-        if(strcmp(temp,userstu) == 0)
+        fscanf(stulog,"%s",temp);
+        if(strcmp(temp,free) == 0)
         {
-            printf("\n\t\t User ID Found");
-            printf("\n\t\t Enter Your Password : ");
-            scanf("%s",passstu);
-        }
-        else
-        {
-            system("cls");
-            printf("\n\t\t User ID Entered does not exist, Try again or contact Administrator");
-            loginmenustu();
+            fscanf(stulog,"%s",temp);
+            skipper=1;
+            break;
         }
 
     }
-
-
+            if(skipper==0)
+            {
+            system("cls");
+            printf("\n\t\t User ID Entered does not exist, Try again or contact Administrator");
+            goto loop;
+            }
+            printf(GREEN "\n\t\t User ID Found\n" RESET);
+            printf("\n\t\t Enter Your Password : ");
+            scanf("%s",passstu);
+            if(strcmp(passstu,temp)==0)
+            {
+                printf(GREEN "\n\t\t Correct Password" RESET);
+                //studentmenu();
+            }
 
 }
-
 
 void studentpassmenu()
 {
@@ -63,7 +78,6 @@ void studentpassmenu()
   }
 }
 
-
 void newstudent()
 {
     FILE *ns;
@@ -76,49 +90,52 @@ void newstudent()
     char stupass[8];
     int clas;
     ns=fopen("newstu.txt","a");
-    printf(YELLOW "\n\t\t\t New Student Entry Menu \n" RESET);
+    printf(BOLDYELLOW "\n\t\t\t ** New Student Entry Menu ** \n" RESET);
 
     printf("\n\t\t SR No. : ");
     scanf("%d",&srno);
-    fprintf(ns,"%d\n",srno);
+    fprintf(ns,"SR.:%d\n",srno);
 
     printf("\n\t\t Name : ");
     scanf("%s",name);
-    fprintf(ns,"%s\n",name);
+    fprintf(ns,"Name:%s\n",name);
 
     printf("\n\t\t Father's Name : ");
     scanf("%s",father);
-    fprintf(ns,"%s\n",father);
+    fprintf(ns,"Father's_Name:%s\n",father);
 
     printf("\n\t\t Mother's Name : ");
     scanf("%s",mother);
-    fprintf(ns,"%s\n",mother);
+    fprintf(ns,"Mother's_Name:%s\n",mother);
 
     printf("\n\t\t Class : ");
     scanf("%d",&clas);
-    fprintf(ns,"%d\n",clas);
+    fprintf(ns,"Class:%d\n",clas);
 
     char contactstu[20];
     printf("\n\t\t Contact : ");
     scanf("%s",contactstu);
-    fprintf(ns,"%s\n",contactstu);
+    fprintf(ns,"Contact:%s\n",contactstu);
 
     printf("\n\t\t Address : ");
     scanf("%s",addr);
-    fprintf(ns,"%s\n",addr);
-    int usrid = clas*100+srno;
-    fprintf(ns,"%d\n",usrid);
+    fprintf(ns,"Address:%s\n",addr);
 
+    int usrid = clas*100+srno;
+    fprintf(ns,"ID:%d\n",usrid);
 
 
     printf(GREEN "\n\n\t\t New Student Entry Created Successfully \n " RESET);
     printf("\n\t\t SR No.: %d \n\t\t Name : %s \n\t\t Father's Name : %s \n\t\t Mother's Name : %s  \n\t\t Class : %d \n\t\t Contact : %s \n\t\t Address : %s ",srno,name,father,mother,clas,contactstu,addr);
+
+
     printf(YELLOW "\n\n\t\t Generated User ID :  "RESET);
     printf("%d\n",usrid);
 
     printf("\n\t\t Set a Password : ");
     scanf("%s",stupass);
     fprintf(ns,"%s\n",stupass);
+    fprintf(ns,"******************************************************************************* \n");
 
     printf("\n\n \t\t 1.Create Another Entry");
     printf("\n\t\t 2.Show Previous Entries");
@@ -136,7 +153,8 @@ void newstudent()
     case 2:
         {
             system("cls");
-            printf(RED "\n\n\t\t Function Coming Soon ...." RESET);
+            gap
+            stumenu();
             break;
         }
     case 3:
@@ -257,8 +275,7 @@ void passchecka(char passa[])
     fp=fopen("adminpass.txt","r+");
     while(fscanf(fp,"%s",password)== 1)
     {
-      int z=strcmp(password,passa);
-    if (z!=0)
+    if (strcmp(password,passa)!=0)
     {
         system("cls");
         printf(RED "\n\n\t\t Wrong Password, Try Again !!\n" RESET);
@@ -269,10 +286,9 @@ void passchecka(char passa[])
         system("cls");
         printf(GREEN "\n\n\t\tCorrect Password ...\n" RESET);
         adminmenu();
-
     }
 
-}
+    }
 }
 
 void adminmenu()
