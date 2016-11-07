@@ -6,12 +6,23 @@
 
 #define RESET   "\033[0m"
 #define BLUE    "\033[34m"      /* Blue */
-#define BOLDYELLOW  "\033[1m\033[33m"      /* Bold Yellow */
 #define RED     "\033[31m"      /* Red */
 #define GREEN   "\033[32m"      /* Green */
 #define YELLOW  "\033[33m"      /* Yellow */
-#define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
 #define gap printf("\n\t\t");
+
+void preventry()
+{
+    FILE *fp;
+    char ch[100];
+    fp=fopen("newstu.txt","r");
+    while(!feof(fp))
+    {
+        fscanf(fp,"%s",ch);
+        printf("%s\n",ch);
+    }
+    fclose(fp);
+}
 
 void loginmenustu()
 {
@@ -90,7 +101,7 @@ void newstudent()
     char stupass[8];
     int clas;
     ns=fopen("newstu.txt","a");
-    printf(BOLDYELLOW "\n\t\t\t ** New Student Entry Menu ** \n" RESET);
+    printf(YELLOW "\n\t\t\t ** New Student Entry Menu ** \n" RESET);
 
     printf("\n\t\t SR No. : ");
     scanf("%d",&srno);
@@ -154,7 +165,7 @@ void newstudent()
         {
             system("cls");
             gap
-            stumenu();
+            preventry();
             break;
         }
     case 3:
@@ -297,7 +308,8 @@ printf("\n\t\t\t\t ***** Welcome to Admin MENU ***** \n");
 printf("\n\t\t 1. Change Password\n");
 printf("\t\t 2. Enter New Admission\n");
 printf("\t\t 3. Enter New Teacher Details\n");
-printf("\t\t 4. Go to Main Menu\n");
+printf("\t\t 4. Print All Student Details\n");
+printf("\t\t 5. Go to Main Menu\n");
 printf("\n\t\t Press Ctrl+C to Exit any time\n");
 printf("\n\t\t Enter your Choice :-  ");
 int am;
@@ -322,8 +334,14 @@ case 3:
         passmenu();
         break;
     }
-
 case 4:
+    {
+        system("cls");
+        preventry();
+        break;
+    }
+
+case 5:
     {   system("cls");
         main();
         break;
