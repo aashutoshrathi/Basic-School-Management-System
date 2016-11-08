@@ -291,12 +291,25 @@ void passchecka(char passa[])
 {
     char ch;
     int i;
-  for(i=0;i<8;i++)
+  for(i=0;(ch=getch())!='\n')
  {
   ch = getch();
+	  if(ch==8)
+	  {
+		  i--;
+		  if(i<0)
+			  i++;
+		  else
+		  {
+			  printf("\b \b");
+		  }
+	  }
+  else
+  {	  
   passa[i] = ch;
   ch = '*';
   printf("%c",ch);
+  }	  
  }
   passa[i]= '\0';
 
