@@ -14,7 +14,7 @@ void preventry()
 {
     FILE *fp;
     char ch[100];
-    fp=fopen("newstu.txt","r");
+    fp=fopen("newstu.txt","r+");
     while(!feof(fp))
     {
         fscanf(fp,"%s",ch);
@@ -102,63 +102,70 @@ void studentpassmenu()
   }
 }
 
-void newstudent()
+struct student
 {
-    FILE *ns;
-    char name[50];
-    int m;
+	 char name[50];
     char addr[100];
     int srno;
     char father[100];
     char mother[100];
     char stupass[8];
     int clas;
+    int usrid;
+    char contactstu[20];
+    
+}s;
+
+void newstudent()
+{
+    FILE *ns;
+    int m;
     ns=fopen("newstu.txt","a");
     printf(YELLOW "\n\t\t\t ** New' Student Entry Menu ** \n" RESET);
 
     printf("\n\t\t SR No. : ");
-    scanf("%d",&srno);
-    fprintf(ns,"SR.:%d\n",srno);
+    scanf("%d",&s.srno);
+    fprintf(ns,"SR.:%d\n",s.srno);
 
     printf("\n\t\t Name : ");
-    scanf("%s",name);
-    fprintf(ns,"Name:%s\n",name);
+    scanf("%s",s.name);
+    fprintf(ns,"Name:%s\n",s.name);
 
     printf("\n\t\t Father's Name : ");
-    scanf("%s",father);
-    fprintf(ns,"Father's_Name:%s\n",father);
+    scanf("%s",s.father);
+    fprintf(ns,"Father's_Name:%s\n",s.father);
 
     printf("\n\t\t Mother's Name : ");
-    scanf("%s",mother);
-    fprintf(ns,"Mother's_Name:%s\n",mother);
+    scanf("%s",s.mother);
+    fprintf(ns,"Mother's_Name:%s\n",s.mother);
 
     printf("\n\t\t Class : ");
-    scanf("%d",&clas);
-    fprintf(ns,"Class:%d\n",clas);
+    scanf("%d",&s.clas);
+    fprintf(ns,"Class:%d\n",s.clas);
 
-    char contactstu[20];
+    
     printf("\n\t\t Contact : ");
-    scanf("%s",contactstu);
-    fprintf(ns,"Contact:%s\n",contactstu);
+    scanf("%s",s.contactstu);
+    fprintf(ns,"Contact:%s\n",s.contactstu);
 
     printf("\n\t\t Address : ");
-    scanf("%s",addr);
-    fprintf(ns,"Address:%s\n",addr);
+    scanf("%s",s.addr);
+    fprintf(ns,"Address:%s\n",s.addr);
 
-    int usrid = clas*100+srno;
-    fprintf(ns,"ID:%d\n",usrid);
+    s.usrid = s.clas*100+s.srno;
+    fprintf(ns,"ID:%d\n",s.usrid);
 
 
     printf(GREEN "\n\n\t\t New Student Entry Created Successfully \n " RESET);
-    printf("\n\t\t SR No.: %d \n\t\t Name : %s \n\t\t Father's Name : %s \n\t\t Mother's Name : %s  \n\t\t Class : %d \n\t\t Contact : %s \n\t\t Address : %s ",srno,name,father,mother,clas,contactstu,addr);
+    printf("\n\t\t SR No.: %d \n\t\t Name : %s \n\t\t Father's Name : %s \n\t\t Mother's Name : %s  \n\t\t Class : %d \n\t\t Contact : %s \n\t\t Address : %s ",s.srno,s.name,s.father,s.mother,s.clas,s.contactstu,s.addr);
 
 
     printf(YELLOW "\n\n\t\t Generated User ID :  "RESET);
-    printf("%d\n",usrid);
+    printf("%d\n",s.usrid);
 
     printf("\n\t\t Set a Password : ");
-    scanf("%s",stupass);
-    fprintf(ns,"%s\n",stupass);
+    scanf("%s",s.stupass);
+    fprintf(ns,"%s\n",s.stupass);
     fprintf(ns,"******************************************************************************* \n");
 
     printf("\n\n \t\t 1.Create Another Entry");
