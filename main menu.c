@@ -121,7 +121,7 @@ void newstudent()
     FILE *ns;
     int m;
     ns=fopen("newstu.txt","a");
-    printf(YELLOW "\n\t\t\t ** New Student Entry Menu ** \n" RESET);
+    printf(YELLOW "\n\t\t\t **** New Student Entry Menu **** \n" RESET);
 
     printf("\n\t\t SR No. : ");
     scanf("%d",&s.srno);
@@ -216,7 +216,7 @@ void changepass(char pass[])
     fp=fopen("adminpass.txt","rw+");
     while(fscanf(fp,"%s",password)== 1)
     {
-      int z=strcmp(password,pass);
+    int z=strcmp(password,pass);
     if (z!=0)
     {
         printf(RED "\n\n\t\t Wrong Password, Try Again !!\n" RESET);
@@ -368,7 +368,7 @@ case 5:
 case 6:
     {
         system("cls");
-        //exit;
+        exit(0);
     }
 
 default:
