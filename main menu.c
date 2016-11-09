@@ -113,7 +113,7 @@ struct student
     int clas;
     int usrid;
     char contactstu[20];
-    
+
 }s;
 
 void newstudent()
@@ -121,7 +121,7 @@ void newstudent()
     FILE *ns;
     int m;
     ns=fopen("newstu.txt","a");
-    printf(YELLOW "\n\t\t\t ** New' Student Entry Menu ** \n" RESET);
+    printf(YELLOW "\n\t\t\t ** New Student Entry Menu ** \n" RESET);
 
     printf("\n\t\t SR No. : ");
     scanf("%d",&s.srno);
@@ -143,7 +143,7 @@ void newstudent()
     scanf("%d",&s.clas);
     fprintf(ns,"Class:%d\n",s.clas);
 
-    
+
     printf("\n\t\t Contact : ");
     scanf("%s",s.contactstu);
     fprintf(ns,"Contact:%s\n",s.contactstu);
@@ -291,25 +291,12 @@ void passchecka(char passa[])
 {
     char ch;
     int i;
-  for(i=0;(ch=getch())!='\n')
+  for(i=0;i<8;i++)
  {
   ch = getch();
-	  if(ch==8)
-	  {
-		  i--;
-		  if(i<0)
-			  i++;
-		  else
-		  {
-			  printf("\b \b");
-		  }
-	  }
-  else
-  {	  
   passa[i] = ch;
   ch = '*';
   printf("%c",ch);
-  }	  
  }
   passa[i]= '\0';
 
@@ -342,7 +329,7 @@ printf("\t\t 2. Enter New Admission\n");
 printf("\t\t 3. Enter New Teacher Details\n");
 printf("\t\t 4. Print All Student Details\n");
 printf("\t\t 5. Go to Main Menu\n");
-printf("\n\t\t Press Ctrl+C to Exit any time\n");
+printf("\t\t 6. Exit\n");
 printf("\n\t\t Enter your Choice :-  ");
 int am;
 scanf("%d",&am);
@@ -377,6 +364,11 @@ case 5:
     {   system("cls");
         main();
         break;
+    }
+case 6:
+    {
+        system("cls");
+        //exit;
     }
 
 default:
