@@ -15,9 +15,8 @@ void preventry()
     FILE *fp;
     char ch[100];
     fp=fopen("newstu.txt","r+");
-    while(!feof(fp))
+    while(fscanf(fp,"%s",ch)==1)
     {
-        fscanf(fp,"%s",ch);
         printf("%s\n",ch);
     }
     fclose(fp);
@@ -281,7 +280,6 @@ void passmenu()
   {
       printf("\n\t\t Invalid Option .. Please Try again.\n\n");
       passmenu();
-
   }
   }
 
