@@ -49,9 +49,8 @@ void loginmenustu()
     strcat(free,userstu);
     stulog=fopen("newstu.txt","r");
     int skipper=0;
-    while(!feof(stulog))
+    while(fscanf(stulog,"%s",temp)==1)
     {
-        fscanf(stulog,"%s",temp);
         if(strcmp(temp,free) == 0)
         {
             fscanf(stulog,"%s",temp);
@@ -127,15 +126,15 @@ void newstudent()
     fprintf(ns,"SR.:%d\n",s.srno);
 
     printf("\n\t\t Name : ");
-    scanf("%s",s.name);
+    scanf(" %[^\n]s",s.name);
     fprintf(ns,"Name:%s\n",s.name);
 
     printf("\n\t\t Father's Name : ");
-    scanf("%s",s.father);
+    scanf(" %[^\n]s",s.father);
     fprintf(ns,"Father's_Name:%s\n",s.father);
 
     printf("\n\t\t Mother's Name : ");
-    scanf("%s",s.mother);
+    scanf(" %[^\n]s",s.mother);
     fprintf(ns,"Mother's_Name:%s\n",s.mother);
 
     printf("\n\t\t Class : ");
@@ -144,11 +143,12 @@ void newstudent()
 
 
     printf("\n\t\t Contact : ");
-    scanf("%s",s.contactstu);
+    scanf(" %[^\n]s",s.contactstu);
     fprintf(ns,"Contact:%s\n",s.contactstu);
 
+
     printf("\n\t\t Address : ");
-    scanf("%s",s.addr);
+    scanf(" %[^\n]s",s.addr);
     fprintf(ns,"Address:%s\n",s.addr);
 
     s.usrid = s.clas*100+s.srno;
@@ -415,7 +415,7 @@ case 3:
 case 4:
     {
         system("cls");
-        preventry();
+        newstudent();
         break;
     }
 default:
