@@ -29,9 +29,18 @@ void stumenu()
     printf("\n\n \t\t 1.Show Your Profile");
     printf("\n\t\t 2.Past Performance");
     printf("\n\t\t 3.Time Table");
+    printf("\n\t\t 7.Exit");
+
     printf("\n\n\t\t Your Choice :- ");
     scanf("%d",&m);
+    switch(m)
+    {
+case 7:
+    {
+        exit(0);
+    }
 
+    }
 
 }
 
@@ -165,7 +174,7 @@ void newstudent()
     printf("\n\t\t Set a Password : ");
     scanf("%s",s.stupass);
     fprintf(ns,"%s\n",s.stupass);
-    fprintf(ns,"******************************************************************************* \n");
+    fprintf(ns,"*******************************************************************************************\n");
 
     printf("\n\n \t\t 1.Create Another Entry");
     printf("\n\t\t 2.Show Previous Entries");
@@ -285,11 +294,11 @@ void passmenu()
 
 }
 
-void passchecka(char passa[])
+int passchecka(char passa[])
 {
     char ch;
     int i;
-  for(i=0;i<8;i++)
+   for(i=0;i<8;i++)
  {
   ch = getch();
   passa[i] = ch;
@@ -317,9 +326,10 @@ void passchecka(char passa[])
     }
 
     }
+    return 0;
 }
 
-void adminmenu()
+int adminmenu()
 {
 printf("\n\t\t\t\t ***** Welcome to Admin MENU ***** \n");
 printf("\n\t\t 1. Change Password\n");
@@ -377,17 +387,23 @@ default:
     }
 
 }
+return 0;
 
+}
+
+void color()
+{
+    printf(" \t\t\t\t        Welcome to School Management System         \n ");
 }
 
 int main()
 {
-printf("\n\t\t\t\t ***** Welcome to School Management System ***** \n");
+color();
 printf("\n\t\t 1. Admin Login\n");
 printf("\t\t 2. Teacher Login\n");
 printf("\t\t 3. Student Login\n");
 printf("\t\t 4. BETA Testing Feature\n");
-printf("\n\t\t Press Ctrl+C to Exit any time\n");
+printf("\t\t 5. Exit\n");
 printf("\n\t\t Enter your Choice :-  ");
 int c;
 scanf("%d",&c);
@@ -415,8 +431,12 @@ case 3:
 case 4:
     {
         system("cls");
-        newstudent();
+        preventry();
         break;
+    }
+case 5:
+    {
+        exit(0);
     }
 default:
     {
