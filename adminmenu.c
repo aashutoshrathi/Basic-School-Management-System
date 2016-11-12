@@ -1,11 +1,12 @@
-void adminmenu()
+int adminmenu()
 {
 printf("\n\t\t\t\t ***** Welcome to Admin MENU ***** \n");
 printf("\n\t\t 1. Change Password\n");
 printf("\t\t 2. Enter New Admission\n");
 printf("\t\t 3. Enter New Teacher Details\n");
-printf("\t\t 4. Go to Main Menu\n");
-printf("\n\t\t Press Ctrl+C to Exit any time\n");
+printf("\t\t 4. Print All Student Details\n");
+printf("\t\t 5. Go to Main Menu\n");
+printf("\t\t 6. Exit\n");
 printf("\n\t\t Enter your Choice :-  ");
 int am;
 scanf("%d",&am);
@@ -29,11 +30,22 @@ case 3:
         passmenu();
         break;
     }
-
 case 4:
+    {
+        system("cls");
+        preventry();
+        break;
+    }
+
+case 5:
     {   system("cls");
         main();
         break;
+    }
+case 6:
+    {
+        system("cls");
+        exit(0);
     }
 
 default:
@@ -44,5 +56,4 @@ default:
     }
 
 }
-
-}
+return 0;
