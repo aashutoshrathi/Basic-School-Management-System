@@ -3,21 +3,21 @@ void changepass(char pass[])
     printf("\n\t\tEnter Your Previous Password :-");
     char ch;
     int i;
-  for(i=0;i<9;i++)
+  for(i=0;i<8;i++)
  {
   ch = getch();
   pass[i] = ch;
   ch = '*';
   printf("%c",ch);
  }
-  pass[i]= '\n';
+  pass[i]= '\0';
 
     char password[8];
     FILE *fp;
-    fp=fopen("adminpass.txt","a+");
+    fp=fopen("adminpass.txt","rw+");
     while(fscanf(fp,"%s",password)== 1)
     {
-      int z=strcmp(password,pass);
+    int z=strcmp(password,pass);
     if (z!=0)
     {
         printf(RED "\n\n\t\t Wrong Password, Try Again !!\n" RESET);
