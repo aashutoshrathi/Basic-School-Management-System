@@ -10,6 +10,33 @@
 #define YELLOW  "\033[33m"      /* Yellow */
 #define gap printf("/n/t/t");
 
+void profile(char id[])
+{
+    loop:
+    printf("");
+    FILE *prf;
+    char temp[100];
+    int skipper;
+    while(fscanf(prf,"%s",temp)==1)
+    {
+        if(strcmp(temp,id) == 0)
+        {
+            skipper=1;
+            break;
+        }
+
+    }
+            if(skipper==0)
+            {
+            system("cls");
+            printf("\n\t\t User ID Entered does not exist, Try again or contact Administrator");
+            goto loop;
+            }
+            printf("ID Found");
+
+
+}
+
 void preventry()
 {
     FILE *fp;
@@ -22,20 +49,33 @@ void preventry()
     fclose(fp);
 }
 
-void stumenu()
+void stumenu(char id[])
 {
     int m;
     printf("\n\t\t\t\t ***** Welcome to Student MENU ***** \n");
     printf("\n\n \t\t 1.Show Your Profile");
     printf("\n\t\t 2.Past Performance");
     printf("\n\t\t 3.Time Table");
+    printf("\n\t\t 5.Go Back To Main Menu");
     printf("\n\t\t 7.Exit");
 
     printf("\n\n\t\t Your Choice :- ");
     scanf("%d",&m);
     switch(m)
     {
-case 7:
+    case 1:
+        {
+            system("cls");
+            profile(id);
+        }
+
+    case 5:
+    {
+        system("cls");
+        main();
+    }
+
+    case 7:
     {
         exit(0);
     }
@@ -55,6 +95,8 @@ void loginmenustu()
     char temp[100];
     printf("\n\t\t Enter Your User ID : ");
     scanf("%s",userstu);
+    char id[100];
+    strcpy(id,userstu);
     strcat(free,userstu);
     stulog=fopen("newstu.txt","r");
     int skipper=0;
@@ -81,7 +123,7 @@ void loginmenustu()
             {
                 system("cls");
                 printf(GREEN "\n\t\t Correct Password !! \n" RESET);
-                stumenu();
+                stumenu(id);
             }
 
 }
@@ -391,14 +433,16 @@ return 0;
 
 }
 
-void color()
+void title()
 {
-    printf(" \t\t\t\t        Welcome to School Management System         \n ");
+   printf(" \t\t\t\t=====================================================\n");
+   printf(" \t\t\t\t         Welcome to School Management System        \n ");
+   printf(" \t\t\t\t=====================================================\n");
 }
 
 int main()
 {
-color();
+title();
 printf("\n\t\t 1. Admin Login\n");
 printf("\t\t 2. Teacher Login\n");
 printf("\t\t 3. Student Login\n");
