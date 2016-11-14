@@ -15,6 +15,8 @@ struct student
     char name[50];
     char addr[100];
     int srno;
+    char gender[2];
+    char dob[10];
     char father[100];
     char mother[100];
     char stupass[8];
@@ -27,27 +29,18 @@ struct student
 
 void profile(char id[])
 {
-    loop:
-    printf("");
     FILE *prf;
-    char temp[100];
-    int skipper;
-    while(fscanf(prf,"%s",temp)==1)
+
+    while(fread(&s,sizeof(s),1,prf)==1)
     {
-        if(strcmp(temp,id) == 0)
+        if(id == s.usrid)
         {
-            skipper=1;
+            printf("%s\n",s.name);
+            printf("%s\n",s.clas);
             break;
         }
 
     }
-            if(skipper==0)
-            {
-            system("cls");
-            printf("\n\t\t User ID Entered does not exist, Try again or contact Administrator");
-            goto loop;
-            }
-            printf("ID Found");
 
     fclose(prf);
 
@@ -55,22 +48,21 @@ void profile(char id[])
 
 int classwise()
 {
-    FILE *fp;
-    fp=fopen("newstu.txt","r");
+   FILE *fp;
+    fp=fopen("newstu.dat","r");
     int clas,count=1;
-    printf("\n\t\t Enter Class : ");
+    printf("\n\tEnter Class : ");
     scanf("%d",&clas);
     while(fread(&s,sizeof(s),1,fp)==1)
     {
         if(clas==s.clas)
         {
-            printf("\t\t %d. %s\n",count,s.name);
-            count++;
+        printf("\t\t %d. %s\n",count,s.name);
+        count++;
         }
     }
     fclose(fp);
     return 0;
-
 }
 
 
@@ -78,10 +70,14 @@ int classwise()
 void preventry()
 {
     FILE *fp;
-    fp=fopen("newstu.txt","r");
+    fp=fopen("newstu.dat","r");
+    int clas,count=1;
+    scanf("%d",&clas);
     while(fread(&s,sizeof(s),1,fp)==1)
     {
-        printf("%d\n",s.clas);
+        if(clas==s.clas)
+        {printf("%d. %s\n",count,s.name);
+        count++;}
     }
     fclose(fp);
 }
@@ -137,7 +133,7 @@ void loginmenustu()
     char id[100];
     strcpy(id,userstu);
     strcat(free,userstu);
-    stulog=fopen("newstu.txt","r");
+    stulog=fopen("newstu.dat","r");
     int skipper=0;
     while(fscanf(stulog,"%s",temp)==1)
     {
@@ -194,7 +190,7 @@ void newstudent()
 {
     FILE *ns;
     int m;
-    ns=fopen("newstu.txt","a");
+    ns=fopen("newstu.dat","a");
     printf(YELLOW "\n\t\t\t **** New Student Entry Menu **** \n" RESET);
 
     printf("\n\t\t SR No.: ");
@@ -202,6 +198,12 @@ void newstudent()
 
     printf("\n\t\t Name : ");
     scanf(" %[^\n]s",s.name);
+
+    printf("\n\t\t Gender : ");
+    scanf("%s",s.gender);
+
+    printf("\n\t\t Date Of Birth: ");
+    scanf("%s",s.dob);
 
     printf("\n\t\t Father's Name : ");
     scanf(" %[^\n]s",s.father);
@@ -234,6 +236,7 @@ void newstudent()
 
     fseek(ns,0,SEEK_END);
     fwrite(&s,sizeof(s),1,ns);
+    fclose(ns);
 
     printf("\n\n \t\t 1.Create Another Entry");
     printf("\n\t\t 2.Show Previous Entries");
@@ -286,7 +289,7 @@ void changepass(char pass[])
          printf("\b\b");
          i--;
          system("cls");
-         puts("Enter password :");
+         printf("\n\t\tEnter Your Previous Password :-");
          for(j=0;j<i;j++)
          printf("*");
          continue;
@@ -299,16 +302,30 @@ void changepass(char pass[])
 
    pass[i] = '\0';
 
-    char password[8];
+    char password[100];
     FILE *fp;
-    fp=fopen("adminpass.txt","rw+");
+    fp=fopen("adminpass.txt","w");
     while(fscanf(fp,"%s",password) == 1)
     {
     int z=strcmp(password,pass);
     if (z!=0)
     {
-        printf(RED "\n\n\t\t Wrong Password, Try Again !!\n" RESET);
-        changepass(pass);
+        printf(RED "\n\n\t\t Wrong Password\n" RESET);
+        printf("\n\t\t1. Try Again");
+        printf("\n\t\t2. Go Back to Main Menu");
+        int sw;
+        scanf("%d",&sw);
+        switch(sw)
+        {
+        case 1:
+           changepass(pass);
+           break;
+        case 2:
+            main();
+            break;
+        }
+
+
     }
     else
     {
@@ -354,7 +371,6 @@ void passmenu()
   {
   case 1:
   { char s[100];
-    printf("\n\t\t Enter Password : ");
     passchecka(s);
     break;
   }
@@ -375,7 +391,7 @@ void passmenu()
 }
 
 int passchecka(char passa[])
-{
+{   printf("\n\t\t Enter Password : ");
       char ch;
         int i=0,j;
 
@@ -395,7 +411,11 @@ int passchecka(char passa[])
          printf("\b\b");
          i--;
          system("cls");
-         puts("Enter password :");
+         printf("\n\t\t You selected Admin Login \n ");
+         printf("\n\t\t 1. Enter Password (8 Characters)\n");
+        printf("\n\t\t 2. Go Back\n\t\t");
+        printf("\n\n\t\t Your Choice : 1 \n");
+        printf("\n\t\t Enter Password : ");
          for(j=0;j<i;j++)
          printf("*");
          continue;
