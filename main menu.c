@@ -8,6 +8,8 @@
 #define RED     "\033[31m"      /* Red */
 #define GREEN   "\033[32m"      /* Green */
 #define YELLOW  "\033[33m"      /* Yellow */
+#define MAGENTA "\033[35m"      /* Magenta */
+#define CYAN    "\033[36m"      /* Cyan */
 
 struct student
 {
@@ -36,7 +38,8 @@ void profile(int id)
         if(id == s.usrid)
         {
             printf(" \t\t\t\t=====================================================\n");
-            printf(" \t\t\t\t                   %s's Profile                   \n",s.name);
+            printf(YELLOW " \t\t\t\t                    %s's Profile                   \n" ,s.name);
+            printf(""RESET);
             printf(" \t\t\t\t=====================================================\n");
             printf("\n\t\t Name : %s\n",s.name);
             printf("\n\t\t User ID : %d\n",s.usrid);
@@ -45,6 +48,8 @@ void profile(int id)
             printf("\n\t\t Category : %s\n",s.cat);
             printf("\n\t\t Class : %d\n",s.clas);
             printf("\n\t\t Contact : %s\n",s.contactstu);
+            printf("\n\t\t Address : %s\n",s.addr);
+            puts(YELLOW "\n\t\t For Any Changes in Profile Contact Administrator" RESET);
             break;
         }
 
@@ -92,11 +97,24 @@ void preventry()
 
 void stumenu(int id)
 {
-    int m;
     printf("\n\t\t\t\t ***** Welcome to Student MENU ***** \n");
+    FILE *fp;
+    fp=fopen("newstu.dat","r");
+    while(fread(&s,sizeof(s),1,fp)==1)
+    {
+        if(id == s.usrid)
+        {
+            printf(CYAN "\n\t\t Welcome " );
+            printf("%s",s.name);
+            printf(" !!"RESET);
+            break;
+        }
+    }
+    int m;
     printf("\n\n \t\t 1.Show Your Profile");
     printf("\n\t\t 2.Past Performance");
     printf("\n\t\t 3.Time Table");
+    printf("\n\n\t 4.Change Password");
     printf("\n\t\t 5.Go Back To Main Menu");
     printf("\n\t\t 7.Exit");
 
@@ -117,6 +135,11 @@ void stumenu(int id)
             main();
             break;
         }
+    case 4:
+        {
+            system("cls");
+
+        }
 
     case 7:
         {
@@ -129,7 +152,7 @@ void stumenu(int id)
 
 int loginmenustu()
 {
-    printf("\n\t\t You selected Student Login \n ");
+    printf(YELLOW "\n\t\t\t\t You selected Student Login \n "RESET);
     FILE *stulog;
     int userstu,poi=0;
     char passstu[100];
@@ -148,21 +171,88 @@ int loginmenustu()
     if(poi==1)
     {
             printf(GREEN "\n\t\t User ID Found\n" RESET);
-              printf("\n\t\t Enter Your Password : ");
-              scanf("%s",passstu);
+
+              char ch;
+   int i=0,j;
+
+
+   printf("\n\t\t Enter password : ");
+
+   while (1)
+    {
+      if (i < 0) {
+         i = 0;
+      }
+
+      ch = getch();
+
+      if (ch == 13)
+         break;
+
+      if (ch == 8)
+      {
+         printf("\b\b");
+         i--;
+         system("cls");
+         printf(YELLOW "\n\t\t\t\t You selected Student Login \n "RESET);
+         printf("\n\t\t Enter Your User ID : %d",userstu);
+         printf(GREEN "\n\n\t\t User ID Found\n" RESET);
+         printf("\n\t\t Enter password : ");
+         for(j=0;j<i;j++)
+         printf("*");
+         continue;
+      }
+      passstu[i] = ch;
+      i++;
+      ch = '*';
+      printf("%c",ch);
+   }
+
+   passstu[i] = '\0';
+
               if(strcmp(passstu,s.stupass)==0)
               {
-                system("cls");
                 printf(GREEN "\n\t\t Correct Password !! \n" RESET);
+                system("cls");
                 stumenu(userstu);
+            }
+            else
+            {
+                printf(RED "\n\t\t Wrong Password !!! \n " RESET);
+                printf("\n\t\t 1. Enter Again");
+                printf("\n\t\t 2. Go Back");
+                printf("\n\n\t\t Your Choice : ");
+                int m;
+        scanf("%d",&m);
+        switch(m)
+        {
+        case 1:
+            {
+                printf("\n\t\t Enter Your Password : ");
+                scanf("%s",passstu);
+              if(strcmp(passstu,s.stupass)==0)
+              {
+                printf(GREEN "\n\t\t Correct Password !! \n" RESET);
+                system("cls");
+                stumenu(userstu);
+              }
+                break;
+            }
+        case 2:
+            {
+                system("cls");
+                main();
+                break;
+            }
+        }
             }
     }
     else
     {
         puts(RED "\n\t\t User ID not found, Contact Admin or Try again\n" RESET);
-        printf("\n\t\t 1. Try Again");
+        printf("\t\t 1. Try Again");
         printf("\n\t\t 2. Go Back");
-        printf("\n\t\t Your Choice : ");
+        printf("\n\n\t\t Your Choice : ");
         int n;
         scanf("%d",&n);
         switch(n)
@@ -465,7 +555,7 @@ int passchecka(char passa[])
     else
     {
         system("cls");
-        printf(GREEN "\n\n\t\tCorrect Password ...\n" RESET);
+        printf(GREEN "\n\n\t\tCorrect Password ;) \n" RESET);
         adminmenu();
     }
 
@@ -544,11 +634,13 @@ return 0;
 
 }
 
-void title()
+int title()
 {
+
    printf(" \t\t\t\t=====================================================\n");
-   printf(" \t\t\t\t         Welcome to School Management System        \n ");
+   printf(" \t\t\t\t         Welcome to School Management System        \n");
    printf(" \t\t\t\t=====================================================\n");
+   return 0;
 }
 
 int main()
