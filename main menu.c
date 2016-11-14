@@ -8,7 +8,6 @@
 #define RED     "\033[31m"      /* Red */
 #define GREEN   "\033[32m"      /* Green */
 #define YELLOW  "\033[33m"      /* Yellow */
-#define gap printf("/n/t/t");
 
 struct student
 {
@@ -20,6 +19,7 @@ struct student
     char father[100];
     char mother[100];
     char stupass[8];
+    char cat[6];
     int clas;
     int usrid;
     char contactstu[20];
@@ -27,16 +27,24 @@ struct student
 }s;
 
 
-void profile(char id[])
+void profile(int id)
 {
     FILE *prf;
-
+    prf=fopen("newstu.dat","r");
     while(fread(&s,sizeof(s),1,prf)==1)
     {
         if(id == s.usrid)
         {
-            printf("%s\n",s.name);
-            printf("%s\n",s.clas);
+            printf(" \t\t\t\t=====================================================\n");
+            printf(" \t\t\t\t                   %s's Profile                   \n",s.name);
+            printf(" \t\t\t\t=====================================================\n");
+            printf("\n\t\t Name : %s\n",s.name);
+            printf("\n\t\t User ID : %d\n",s.usrid);
+            printf("\n\t\t Father's Name : %s\n",s.father);
+            printf("\n\t\t Mother's Name : %s\n",s.mother);
+            printf("\n\t\t Category : %s\n",s.cat);
+            printf("\n\t\t Class : %d\n",s.clas);
+            printf("\n\t\t Contact : %s\n",s.contactstu);
             break;
         }
 
@@ -82,7 +90,7 @@ void preventry()
     fclose(fp);
 }
 
-void stumenu(char id[])
+void stumenu(int id)
 {
     int m;
     printf("\n\t\t\t\t ***** Welcome to Student MENU ***** \n");
@@ -119,48 +127,61 @@ void stumenu(char id[])
 
 }
 
-void loginmenustu()
+int loginmenustu()
 {
-    loop:
-    printf("");
+    printf("\n\t\t You selected Student Login \n ");
     FILE *stulog;
-    char free[100]="ID:";
-    char userstu[100];
+    int userstu,poi=0;
     char passstu[100];
-    char temp[100];
-    printf("\n\t\t Enter Your User ID : ");
-    scanf("%s",userstu);
-    char id[100];
-    strcpy(id,userstu);
-    strcat(free,userstu);
     stulog=fopen("newstu.dat","r");
-    int skipper=0;
-    while(fscanf(stulog,"%s",temp)==1)
+    printf("\n\t\t Enter Your User ID : ");
+    scanf("%d",&userstu);
+    while(fread(&s,sizeof(s),1,stulog)==1)
     {
-        if(strcmp(temp,free) == 0)
+        if(userstu==s.usrid)
         {
-            fscanf(stulog,"%s",temp);
-            skipper=1;
-            break;
+             poi=1;
+             break;
         }
-
     }
-            if(skipper==0)
-            {
-              system("cls");
-              printf("\n\t\t User ID Entered does not exist, Try again or contact Administrator");
-              goto loop;
-            }
-              printf(GREEN "\n\t\t User ID Found\n" RESET);
+
+    if(poi==1)
+    {
+            printf(GREEN "\n\t\t User ID Found\n" RESET);
               printf("\n\t\t Enter Your Password : ");
               scanf("%s",passstu);
-              if(strcmp(passstu,temp)==0)
-            {
+              if(strcmp(passstu,s.stupass)==0)
+              {
                 system("cls");
                 printf(GREEN "\n\t\t Correct Password !! \n" RESET);
-                stumenu(id);
+                stumenu(userstu);
             }
-
+    }
+    else
+    {
+        puts(RED "\n\t\t User ID not found, Contact Admin or Try again\n" RESET);
+        printf("\n\t\t 1. Try Again");
+        printf("\n\t\t 2. Go Back");
+        printf("\n\t\t Your Choice : ");
+        int n;
+        scanf("%d",&n);
+        switch(n)
+        {
+        case 1:
+            {
+                system("cls");
+                loginmenustu();
+                break;
+            }
+        case 2:
+            {
+                system("cls");
+                main();
+                break;
+            }
+        }
+    }
+return 0;
 }
 
 void studentpassmenu()
@@ -217,6 +238,8 @@ void newstudent()
     printf("\n\t\t Contact : ");
     scanf(" %[^\n]s",s.contactstu);
 
+    printf("\n\t\t Category (GEN / ST / SC / OBC): ");
+    scanf(" %[^\n]s",s.cat);
 
     printf("\n\t\t Address : ");
     scanf(" %[^\n]s",s.addr);
@@ -556,7 +579,6 @@ case 2:
 case 3:
     {
         system("cls");
-        printf("\n\t\t You selected Student Login \n ");
         loginmenustu();
         break;
     }
