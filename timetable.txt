@@ -1,0 +1,95 @@
+                                          					Timetable FOR STD. 1st TO 4th
+							-----------------------------------------
+ 
+Faculty for each subject is same for std. 1st to 4th.
+
+SUBJECTS : Maths
+--------------   English
+	   Hindi
+	   Evs
+	   Games
+                     Music
+	   GK
+                     Drawing
+
+                     DAY-------->            Monday	      	Tuesday                    Wednesday		Thursday		Friday	           Saturday
+
+	       STD.
+	       -------
+	        1st		Maths		Music		Drawing		Evs		Hindi		GK
+Lecture 1st        2nd		Eng.		Hindi		Games		GK		Evs		Music
+	        3rd		Hindi		Evs		Eng.		Maths		Games		Eng.
+   	        4th		Evs		GK		Maths		Hindi		English		Maths
+
+	        1st		Games		Eng.		Eng.		Maths		Evs		Hindi
+Lecture  2nd     2nd	  	Hindi		Maths		Maths		Eng.		Drawing		Evs
+	        3rd		Evs		GK		Drawing		Hindi		Maths		Music
+	        4th		Drawing		Music		Evs		Evs		Hindi		Eng.
+												
+	        1st		Drawing		Evs		Hindi		GK		Maths		Music
+Lecture 3rd       2nd		Games		GK		Evs		Music		Eng.		Hindi
+	        3rd		Eng.		Maths		Games		Eng.		Hindi		Evs
+  	        4th		Maths		Hindi		English		Maths		Evs		GK
+												
+	        1st		Eng.		Maths		Evs		Hindi		Games		Eng.
+Lecture 4th       2nd		Maths		Eng.		Drawing		Evs		Hindi		Maths
+	        3rd		Drawing		Hindi		Maths		Music		Evs		GK
+	        4th		Games		Evs		Hindi		Eng.		Drawing		Music
+												
+	        1st		Hindi		GK		Maths		Music		Drawing		Evs
+Lecture 5th       2nd		Evs		Music		Eng.		Hindi		Games		GK
+	        3rd		Games		Eng.		Hindi		Evs		Eng.		Maths
+  	        4th		Eng.		Maths		Evs		GK		Maths		Hindi
+												
+	       1st		Evs		Hindi		Games		Eng.		Eng.		Maths
+Lecture 6th      2nd		Drawing		Evs		Hindi		Maths		Maths		Eng.
+ 	       3rd		Maths		Music		Evs		GK		Drawing		Hindi
+	       4th		Hindi		Eng.		Drawing		Music		Games		Evs
+
+							Timetable FOR STD. 5th TO 8th
+							------------------------------------------
+
+Faculty for each subject is same for std. 5th to 8th.
+
+SUBJECTS : Maths
+--------------   English
+	   Hindi
+	   SS
+	   Games
+                     Sanskrit
+	   Computer
+                     Science
+
+                     DAY-------->            Monday	      	Tuesday                    Wednesday		Thursday		Friday	           Saturday
+
+	       STD.
+	       -------
+	        1st		Maths		Sans.		Comp.		SS		Science		Games
+Lecture 1st        2nd		Eng.		Science		Hindi		Games		SS		Sans.
+	        3rd		Science		SS		Eng.		Maths		Hindi		Eng.
+   	        4th		SS		Games		Maths		Science		English		Maths
+
+	        1st		Hindi		Eng.		Eng.		Maths		SS		Science
+Lecture  2nd     2nd	  	Science		Maths		Maths		Eng.		Comp.		SS
+	        3rd		SS		Games		Comp.		Science		Maths		Sans.
+	        4th		Comp.		Sans.		SS		SS		Science		Eng.
+												
+	        1st		Comp.		SS		Science		Games		Maths		Sans.
+Lecture 3rd       2nd		Hindi		Games		SS		Sans.		Eng.		Science
+	        3rd		Eng.		Maths		Hindi		Eng.		Science		SS
+  	        4th		Maths		Science		Eng..		Maths		SS		Games
+												
+	        1st		Eng.		Maths		SS		Science		Hindi		Eng.
+Lecture 4th       2nd		Maths		Eng.		Comp.		SS		Science		Maths
+	        3rd		Comp.		Science		Maths		Sans.		SS		Games
+	        4th		Hindi		SS		Science		Eng.		Comp.		Sans.
+												
+	        1st		Science		Games		Maths		Sans.		Comp.		SS
+Lecture 5th       2nd		SS		Sans.		Eng.		Science		Hindi		Games
+	        3rd		Hindi		Eng.		Science		SS		Eng.		Maths
+  	        4th		Eng.		Maths		SS		Games		Maths		Science
+												
+	       1st		SS		Hindi		Games		Eng.		Eng.		Maths
+Lecture 6th      2nd		Comp.		Evs		Hindi		Maths		Maths		Eng.
+ 	       3rd		Maths		Music		Evs		GK		Drawing		Science
+	       4th		Science		Eng.		Drawing		Music		Games		SS
