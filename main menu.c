@@ -47,10 +47,235 @@ struct teacher
 
 }t;
 
+int tmenu(int id)
+{
+    printf("\n\t\t\t\t ***** Welcome to Teacher MENU ***** \n");
+    FILE *fp;
+    fp=fopen("teacher.dat","r");
+    while(fread(&t,sizeof(t),1,fp)==1)
+    {
+        if(id == t.teaid)
+        {
+            printf(CYAN "\n\t\t Welcome " );
+            printf("%s",t.name);
+            printf(" !!"RESET);
+            break;
+        }
+    }
+    int m;
+    printf("\n\n\t\t 1.Show Your Profile");
+    printf("\n\t\t 2.Class Wise Students");
+    printf("\n\t\t 3.Time Table");
+    printf("\n\t\t 4.Change Password");
+    printf("\n\t\t 5.Log Out");
+
+    printf("\n\n\t\t Your Choice :- ");
+    scanf("%d",&m);
+    switch(m)
+    {
+    case 1:
+        {
+            system("cls");
+            profilet(id);
+            break;
+        }
+    case 3:
+        {
+            system("cls");
+            tt(id);
+            break;
+        }
+    case 2:
+        {
+            system("cls");
+            classwise();
+            break;
+        }
+    case 5:
+        {
+            system("cls");
+            main();
+            break;
+        }
+    case 4:
+        {
+            system("cls");
+            stupassch(id);
+
+        }
+    default:
+        {
+
+            system("cls");
+            printf(RED "\n\t\t Invalid Option selected , Enter Again \n" RESET);
+            tmenu(id);
+        }
+
+    }
+return 0;
+
+}
+
+int allt()
+{
+    printf("\n\t\t ===== Teacher Details ===== ");
+    printf("\n\t\t Name                 ID          Password");
+    FILE *fp;
+    fp=fopen("teacher.dat","r");
+    while(fread(&t,sizeof(t),1,fp)==1)
+    {
+        printf("\n");
+        printf("\t\t %s               %d           %s",t.name,t.teaid,t.teapass);
+    }
+    printf("\n\t\t ===== End of List ======");
+    int x;
+    printf("\n\n\t\t Press   1. Log Out");
+    printf("\n\t\t         2. Go Back");
+    printf("\n\n\t\t Your Choice :");
+    scanf("%d",&x);
+    switch(x)
+    {
+    case 1:
+        {
+            system("cls");
+            main();
+            break;
+        }
+    case 2:
+        {
+            system("cls");
+            adminmenu();
+            break;
+        }
+    }
+    fclose(fp);
+    return 0;
+
+}
+
+int loginmenutea()
+{
+    printf(YELLOW "\n\t\t\t\t You selected Teacher Login \n "RESET);
+    FILE *fp;
+    int teaid,poi=0;
+    char passstu[100];
+    fp=fopen("teacher.dat","r");
+    printf("\n\t\t Enter Your User ID : ");
+    scanf("%d",&teaid);
+    while(fread(&t,sizeof(t),1,fp)==1)
+    {
+        if(teaid==t.teaid)
+        {
+             poi=1;
+             break;
+        }
+    }
+
+    if(poi==1)
+    {
+            printf(GREEN "\n\t\t User ID Found\n" RESET);
+
+              char ch;
+   int i=0,j;
+
+
+   printf("\n\t\t Enter password : ");
+
+   while (1)
+    {
+      if (i < 0) {
+         i = 0;
+      }
+
+      ch = getch();
+
+      if (ch == 13)
+         break;
+
+      if (ch == 8)
+      {
+         printf("\b\b");
+         i--;
+         system("cls");
+         printf(YELLOW "\n\t\t\t\t You selected Student Login \n "RESET);
+         printf("\n\t\t Enter Your User ID : %d",teaid);
+         printf(GREEN "\n\n\t\t User ID Found\n" RESET);
+         printf("\n\t\t Enter password : ");
+         for(j=0;j<i;j++)
+         printf("*");
+         continue;
+      }
+      passstu[i] = ch;
+      i++;
+      ch = '*';
+      printf("%c",ch);
+   }
+
+   passstu[i] = '\0';
+
+              if(strcmp(passstu,t.teapass)==0)
+              {
+                printf(GREEN "\n\t\t Correct Password !! \n" RESET);
+                system("cls");
+                tmenu(teaid);
+            }
+            else
+            {
+                printf(RED "\n\t\t Wrong Password !!! \n " RESET);
+                printf("\n\t\t 1. Enter Again");
+                printf("\n\t\t 2. Go Back");
+                printf("\n\n\t\t Your Choice : ");
+                int m;
+        scanf("%d",&m);
+        switch(m)
+        {
+        case 1:
+            {
+                system("cls");
+                loginmenutea();
+                break;
+            }
+        case 2:
+            {
+                system("cls");
+                main();
+                break;
+            }
+        }
+            }
+    }
+    else
+    {
+        puts(RED "\n\t\t User ID not found, Contact Admin or Try again\n" RESET);
+        printf("\t\t 1. Try Again");
+        printf("\n\t\t 2. Go Back");
+        printf("\n\n\t\t Your Choice : ");
+        int n;
+        scanf("%d",&n);
+        switch(n)
+        {
+        case 1:
+            {
+                system("cls");
+                loginmenutea();
+                break;
+            }
+        case 2:
+            {
+                system("cls");
+                main();
+                break;
+            }
+        }
+    }
+return 0;
+}
+
 int credits()
 {
     system("cls");
-    printf("\n\n\t\t ============= Project Prepared By ================");
+    system("COLOR 0A");
+    printf("\n\n\t\t ============== Project Prepared By ================");
     printf("\n\n\t\t == Raja Bhargava ");
     printf("\n\n\t\t == Aashutosh Rathi ");
     printf("\n\n\t\t == Daksh Gandoliya ");
@@ -172,7 +397,6 @@ int tt(int id)
 return 0;
 }
 
-
 int stupassch(int id)
 {
     FILE *fp;
@@ -267,21 +491,75 @@ void profile(int id)
 
 }
 
+
+int profilet(int id)
+{
+    FILE *prf;
+    prf=fopen("teacher.dat","r");
+    while(fread(&t,sizeof(t),1,prf)==1)
+    {
+        if(id == t.teaid)
+        {
+            printf(" \t\t\t\t=====================================================\n");
+            printf(YELLOW " \t\t\t\t                    %s's Profile                   \n" ,t.name);
+            printf(""RESET);
+            printf(" \t\t\t\t=====================================================\n");
+            printf("\n\t\t Name : %s\n",t.name);
+            printf("\n\t\t User ID : %d\n",t.teaid);
+            printf("\n\t\t Father's Name : %s\n",t.father);
+            printf("\n\t\t Mother's Name : %s\n",t.mother);
+            printf("\n\t\t Category : %s\n",t.cat);
+            printf("\n\t\t Qualification : %s\n",t.qual);
+            printf("\n\t\t Area Of Interest : %s\n",t.sp);
+            printf("\n\t\t Contact : %s\n",t.contacttea);
+            printf("\n\t\t Address : %s\n",t.addr);
+            puts(YELLOW "\n\t\t For Any Changes in Profile Contact Administrator" RESET);
+            break;
+        }
+
+    }
+        printf("\n\n\t\t Press 1. Logout");
+        printf("\n\t\t       2. Go Back\n\t\t");
+        int y;
+        scanf("%d",&y);
+        switch(y)
+        {
+        case 1:
+            {
+                system("cls");
+                main();
+            }
+        case 2:
+            {
+                system("cls");
+                tmenu(id);
+            }
+        }
+    fclose(prf);
+    return 0;
+
+}
+
+
+
 int classwise()
 {
    FILE *fp;
     fp=fopen("newstu.dat","r");
     int clas,count=1;
-    printf("\n\tEnter Class : ");
+    printf("\n\t\tEnter Class : ");
     scanf("%d",&clas);
+    printf("\n\t\t    ======= Class %dth =======\n",clas);
+    printf("\n\t\t     Name          ID       Gender\n ");
     while(fread(&s,sizeof(s),1,fp)==1)
     {
         if(clas==s.clas)
         {
-        printf("\t\t %d. %s\n",count,s.name);
+        printf("\t\t %d. %s          %d         %s",count,s.name,s.usrid,s.gender);
         count++;
         }
     }
+    printf("\n\t\t   ====== End of List =========== \n");
     printf("\n\t\tPress  1.Log Out");
     printf("\n\t\t       2.Go Back\n\t\t   ");
 
@@ -377,6 +655,13 @@ int stumenu(int id)
     case 7:
         {
            credits();
+        }
+    default:
+        {
+
+            system("cls");
+            printf(RED "\n\t\t Invalid Option selected , Enter Again \n" RESET);
+            stumenu(id);
         }
 
     }
@@ -800,8 +1085,8 @@ printf("\t\t 3. Enter New Teacher Details\n");
 printf("\t\t 4. Print All Student Details\n");
 printf("\t\t 5. Class Wise Student Details\n");
 printf("\t\t 6. Delete Student Entry\n");
+printf("\t\t 7. Print All Teacher Details\n");
 printf("\t\t 8. Log Out\n");
-printf("\t\t 9. Exit\n");
 printf("\n\t\t Enter your Choice :-  ");
 int am;
 scanf("%d",&am);
@@ -844,7 +1129,9 @@ case 6:
     }
 case 7:
     {
-
+        system("cls");
+        allt();
+        break;
     }
 
 case 8:
@@ -852,17 +1139,12 @@ case 8:
         main();
         break;
     }
-case 9:
-    {
-        system("cls");
-        credits();
-    }
 
 
 default:
     {   system("cls");
         printf("\n\t\t Invalid Option .. Please Try again.\n\n");
-        main();
+        adminmenu();
         break;
     }
 
@@ -873,7 +1155,7 @@ return 0;
 
 int title()
 {
-
+    system("COLOR 0A");
    printf(" \t\t\t\t=====================================================\n");
    printf(" \t\t\t\t         Welcome to School Management System        \n");
    printf(" \t\t\t\t=====================================================\n");
@@ -901,11 +1183,11 @@ case 1:
     }
 case 2:
     {   system("cls");
-        printf("\n\t\t You selected Teacher Login \n");
-        passmenu();
+        loginmenutea();
         break;
     }
 case 3:
+
     {
         system("cls");
         loginmenustu();
