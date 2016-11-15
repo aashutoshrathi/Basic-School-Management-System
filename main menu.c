@@ -587,13 +587,34 @@ void preventry()
 {
     FILE *fp;
     fp=fopen("newstu.dat","r");
-    int clas,count=1;
-    scanf("%d",&clas);
+    int count=1;
+    printf("\t\t ======= List of Students ======= \n");
+    printf(" \t\t    Name         ID       Class       Gender\n\n");
     while(fread(&s,sizeof(s),1,fp)==1)
     {
-        if(clas==s.clas)
-        {printf("%d. %s\n",count,s.name);
+        {printf("\t\t%d. %s        %d       %d           %s\n",count,s.name,s.usrid,s.clas,s.gender);
         count++;}
+    }
+    int x;
+    printf("\n\t\t ====== End Of List =======\n\n");
+    printf("\t\t Press  1. Go Back");
+    printf("\n\t\t       2. Log Out");
+    printf("\n\t\t       ");
+    scanf("%d",&x);
+    switch(x)
+    {
+    case 1:
+        {
+            system("cls");
+            adminmenu();
+            break;
+        }
+    case 2:
+        {
+            system("cls");
+            main();
+            break;
+        }
     }
     fclose(fp);
 }
@@ -619,7 +640,6 @@ int stumenu(int id)
     printf("\n\t\t 3.Time Table");
     printf("\n\t\t 4.Change Password");
     printf("\n\t\t 5.Log Out");
-    printf("\n\t\t 7.Exit");
 
     printf("\n\n\t\t Your Choice :- ");
     scanf("%d",&m);
@@ -652,10 +672,7 @@ int stumenu(int id)
 
         }
 
-    case 7:
-        {
-           credits();
-        }
+
     default:
         {
 
